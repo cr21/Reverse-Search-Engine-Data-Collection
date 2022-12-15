@@ -1,0 +1,14 @@
+boto3
+mysql-connector-python
+fastapi
+pyyaml
+from-root
+uvicorn[standard]
+python-multipart
+requests
+tqdm
+pillow
+dnspython
+pymongo
+typing
+-e .
