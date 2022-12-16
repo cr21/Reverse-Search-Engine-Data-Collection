@@ -22,6 +22,8 @@ class MongoClientConnector:
                 MongoClientConnector.client = pymongo.MongoClient(MONGO_DB_URL, tlsCAFile=ca)
             self.client = MongoClientConnector.client
             self.database = self.client[self.db_name]
+            print(self.database)
+            print("**"*100)
             
         except Exception as exp:
             raise exp("Exception in MongoDb Connection")
