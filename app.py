@@ -26,7 +26,7 @@ def run():
 def fetch_label():
     try:
         global choices
-        print("mongo_client",mongo_client)
+        print("mongo_client",mongo_client.database)
         print("*"*100)
         result = mongo_client.database['labels'].find()
         documents = [document for document in result]
