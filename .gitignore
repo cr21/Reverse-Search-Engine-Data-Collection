@@ -131,7 +131,7 @@ dmypy.json
 
 # project specific
 # ignore all log dirs
-logs
+logs/
 
 # ignore all data folderx
-data
+data/

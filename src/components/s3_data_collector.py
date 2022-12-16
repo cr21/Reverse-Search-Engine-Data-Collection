@@ -58,7 +58,7 @@ class S3Collector:
 
     def sync_data(self):
         logging.info("+++++++++++++ SYNC PROCESS STARTED ++++++++++++++++")
-        os.system(f"aws s3 sync { self.images_dir }  s3://cr-image-search-engine/images/ ")
+        os.system(f"aws s3 sync { self.images_dir }  s3://cr-img-search-engine/images/ ")
         logging.info("+++++++++++++ SYNC PROCESS FINISHED ++++++++++++++++")
 
 
@@ -77,3 +77,6 @@ class S3Collector:
             
 
 
+if __name__ == "__main__":
+    s3_collector = S3Collector()
+    s3_collector.run_step()
