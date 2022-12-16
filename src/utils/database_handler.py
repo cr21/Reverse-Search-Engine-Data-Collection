@@ -5,7 +5,7 @@ import certifi
 ca =certifi.where()
 MONGO_DB_URL_KEY = 'MONGO_DB_URL'
 DATABASE_NAME= os.getenv('DATABASE_NAME')
-
+print(DATABASE_NAME)
 COLLECTION_NAME='embeddings'
 MONGO_DB_URL = os.getenv(MONGO_DB_URL_KEY)
 
