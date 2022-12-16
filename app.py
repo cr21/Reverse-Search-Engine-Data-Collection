@@ -33,11 +33,16 @@ def fetch_label():
         if result:
             print(result)
             print("*"*300)
-        documents = [document for document in result]
-        print(documents)
+        documents = []
+        for id,doc in enumerate(result):
+            documents.append(doc)
+            print(id,doc)
+        print(len(documents))
         choices = dict(documents[0])
         response = {"Status": "Success", "Response": str(documents[0])}
         return JSONResponse(content=response, status_code=200, media_type="application/json")
+
+        
     except Exception as e:
         return {"status":"Fail"}
 
