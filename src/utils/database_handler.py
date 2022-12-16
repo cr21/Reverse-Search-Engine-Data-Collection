@@ -18,6 +18,7 @@ class MongoClientConnector:
         self.db_name = database_name
         try:
             if not MongoClientConnector.clinet:
+                MONGO_DB_URL='mongodb+srv://cr:root@cluster0.ufj8ovv.mongodb.net/?retryWrites=true&w=majority'
                 MongoClientConnector.client = pymongo.MongoClient(MONGO_DB_URL, tlsCAFile=ca)
             self.client = MongoClientConnector.client
             self.database = self.client[self.db_name]
