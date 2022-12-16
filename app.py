@@ -63,6 +63,12 @@ def single_upload():
 
 @app.post("/single_upload/")
 async def single_upload(label: str, file: UploadFile = None):
+    # print(type(file.file))
+    # import io
+    # ffff= io.BytesIO(file.file)
+    # print(type(ffff))
+    # print(1/0)
+    # return {"file":type(file.file)}
     label = choices.get(label, False)
     
     if file.content_type == "image/jpeg" and label != False:
