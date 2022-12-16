@@ -8,5 +8,6 @@ WORKDIR /searchengine
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 EXPOSE 8080
-
+#run
 CMD ["python","app.py"]
+
