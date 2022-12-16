@@ -32,9 +32,11 @@ def fetch_label():
         print(result)
         if result:
             print(result)
-            print("*"*300)
+            print("+"*300)
+        print(list(result))
         documents = []
         for id,doc in enumerate(result):
+            
             documents.append(doc)
             print(id,doc)
         print(len(documents))
