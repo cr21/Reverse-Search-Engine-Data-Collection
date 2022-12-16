@@ -108,7 +108,7 @@ jobs:
           -e ATLAS_CLUSTER_USERNAME=${{ secrets.ATLAS_CLUSTER_USERNAME }} \
           -e ATLAS_CLUSTER_PASSWORD=${{ secrets.ATLAS_CLUSTER_PASSWORD }} \
           -e DATABASE_NAME=${{ secrets.DATABASE_NAME }} \
-          -p 8080:8080 ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:DataCollection
+          -p 8080:8080 310559879674.dkr.ecr.us-east-1.amazonaws.com/image-data-collection:DataCollection
 
 
 
