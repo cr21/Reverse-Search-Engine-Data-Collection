@@ -14,7 +14,9 @@ class s3Connection:
             aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY')
         )
         self.s3 = session.resource("s3")
-        self.bucket = self.s3.Bucket(os.environ["AWS_BUCKET_NAME"])
+        
+        self.bucket = self.s3.Bucket('cr-img-search-engine')
+        # self.bucket = self.s3.Bucket(os.getenv("AWS_BUCKET_NAME")
         
 
     def add_label(self, label:str) -> Dict:
