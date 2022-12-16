@@ -107,7 +107,7 @@ jobs:
           -e DATABASE_NAME=${{ secrets.DATABASE_NAME }} \
           -e ATLAS_CLUSTER_USERNAME=${{ secrets.ATLAS_CLUSTER_USERNAME }} \
           -e ATLAS_CLUSTER_PASSWORD=${{ secrets.ATLAS_CLUSTER_PASSWORD }} \
-          -e DATABASE_NAME=${{ secrets.DATABASE_NAME }} \
+          -e MONGO_DB_URL=${{ secrets.MONGO_DB_URL }} \
           -p 8080:8080 310559879674.dkr.ecr.us-east-1.amazonaws.com/image-data-collection:DataCollection
 
 
