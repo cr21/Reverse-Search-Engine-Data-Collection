@@ -24,6 +24,7 @@ class MongoClientConnector:
             self.database = self.client[self.db_name]
             print(self.database)
             print("**"*100)
+            print("")
             
         except Exception as exp:
             raise exp("Exception in MongoDb Connection")
