@@ -10,15 +10,15 @@ from src.exception import CustomException
 class s3Connection:
 
     def __init__(self) -> None:
-        session = boto3.Session(
-            aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
-            aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY')
-        )
-        self.s3 = session.resource("s3")
+        # session = boto3.Session(
+        #     aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
+        #     aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY')
+        # )
+        # self.s3 = session.resource("s3")
 
-        # self.s3 = boto3.client('s3')
+        self.s3 = boto3.client('s3')
         self.bucket = os.getenv('AWS_BUCKET_NAME')
-        # self.bucket = self.s3.Bucket('cr-img-search-engine')
+        #self.bucket = self.s3.Bucket('cr-img-search-engine')
         #self.bucket = self.s3.Bucket(os.getenv("AWS_BUCKET_NAME"))
         
 
@@ -47,13 +47,16 @@ class s3Connection:
 
             # fo = io.BytesIO(b'my data stored as file object in RAM')
             # client.upload_fileobj(fo, bucket, key)
-            self.bucket.upload_fileobj(
-                                        image_path,
-                                        f"images/{label}/{get_unique_image_name()}.jpeg",
-                                        ExtraArgs={"ACL": "public-read"}
-            
-            )
 
+            self.s3.upload_fileobj(image_path, self.bucket, f"images/{label}/{get_unique_image_name()}.jpeg")
+        
+            # self.bucket.upload_fileobj(
+            #                             image_path,
+            #                             f"images/{label}/{get_unique_image_name()}.jpeg",
+            #                             ExtraArgs={"ACL": "public-read"}
+            
+            # )
+            
             return {"Created":True}
 
             

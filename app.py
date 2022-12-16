@@ -5,6 +5,7 @@ from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
 from typing import List, Union, Any
 import os
+import io
 import sys
 from src.utils.s3_handler import s3Connection
 
@@ -70,9 +71,17 @@ async def single_upload(label: str, file: UploadFile = None):
     # print(1/0)
     # return {"file":type(file.file)}
     label = choices.get(label, False)
-    
+    #print(label)
     if file.content_type == "image/jpeg" and label != False:
-        response = s3_connection.upload_to_s3(file.file, label)
+        contents = await file.read()
+        #print(contents)
+        temp_file = io.BytesIO()
+        temp_file.write(contents)
+        temp_file.seek(0)
+        
+        
+        response = s3_connection.upload_to_s3(temp_file, label)
+        temp_file.close()
         return {"filename": file.filename, "label": label, "S3-Response": response}
     else:
         return {
