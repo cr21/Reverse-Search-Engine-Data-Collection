@@ -15,8 +15,8 @@ class s3Connection:
         )
         self.s3 = session.resource("s3")
         
-        self.bucket = self.s3.Bucket('cr-img-search-engine')
-        # self.bucket = self.s3.Bucket(os.getenv("AWS_BUCKET_NAME")
+        # self.bucket = self.s3.Bucket('cr-img-search-engine')
+        self.bucket = self.s3.Bucket(os.getenv("AWS_BUCKET_NAME"))
         
 
     def add_label(self, label:str) -> Dict:
