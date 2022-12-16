@@ -28,8 +28,10 @@ def fetch_label():
         global choices
         result = mongo_client.database['labels'].find()
         if not result:
-            print("*"*50)
+            print("@"*50)
+            print(result)
             print(list(result))
+            print("#"*300)
         print(list(result))
         documents = [document for document in result]
         choices = dict(documents[0])
