@@ -84,6 +84,7 @@ jobs:
       - name: Docker System Prune to Remove Old Images
         run: docker system prune -f
 
+
       - name: Run Docker Image to serve users
         run: |
           docker run --name=data-collection -d \
