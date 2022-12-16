@@ -33,7 +33,7 @@ def fetch_label():
         if  result:
             print("1"*50)
             print(result)
-            print("2"*300)
+            print("21"*300)
         return JSONResponse(content=str(list(result)), status_code=200, media_type="application/json")
         documents = [document for document in result]
         choices = dict(documents[0])
