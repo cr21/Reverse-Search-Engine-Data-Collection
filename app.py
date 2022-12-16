@@ -21,17 +21,20 @@ choices = {}
 def run():
     return {"dummy"}
 # Fetch All Labels
+
 @app.get("/fetch")
 def fetch_label():
     try:
         global choices
+        print("mongo_client",mongo_client)
+        print("*"*100)
         result = mongo_client.database['labels'].find()
         documents = [document for document in result]
         choices = dict(documents[0])
         response = {"Status": "Success", "Response": str(documents[0])}
         return JSONResponse(content=response, status_code=200, media_type="application/json")
     except Exception as e:
-        raise e
+        return {"status":"Fail", "message":response[1]}
 
 @app.post("/add_label/{label_name}")
 def add_label(label_name:str):

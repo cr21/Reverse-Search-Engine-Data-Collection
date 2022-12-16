@@ -8,6 +8,8 @@ DATABASE_NAME= 'reverse_image_search_engine'
 
 COLLECTION_NAME='embeddings'
 MONGO_DB_URL = os.getenv(MONGO_DB_URL_KEY)
+print("MONGO_DB_URL",MONGO_DB_URL)
+print("*"*100)
 
 class MongoClientConnector:
     clinet= None
