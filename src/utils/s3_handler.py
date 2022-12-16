@@ -5,7 +5,7 @@ import os
 import io
 import sys
 from src.exception import CustomException
-#s3 connection
+#s3 connections
 class s3Connection:
 
     def __init__(self) -> None:

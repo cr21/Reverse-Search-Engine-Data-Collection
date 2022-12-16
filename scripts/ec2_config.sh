@@ -26,7 +26,6 @@ curl -o actions-runner-linux-x64-2.299.1.tar.gz -L https://github.com/actions/ru
 echo "147c14700c6cb997421b9a239c012197f11ea9854cd901ee88ead6fe73a72c74  actions-runner-linux-x64-2.299.1.tar.gz" | shasum -a 256 -c
 tar xzf ./actions-runner-linux-x64-2.299.1.tar.gz
 
-
 ## Important Allow github token so we can connect with github token automatically whenever machine goes down
 ./config.sh --url https://github.com/cr21/Reverse-Search-Engine-Data-Collection --token ACG5HLVRSKZ7L5O7S3LKI5TDTQBLG
 ./run.sh
