@@ -38,6 +38,7 @@ def fetch_label():
             documents.append(doc)
             print(id,doc)
         print(len(documents))
+        print("**")
         choices = dict(documents[0])
         response = {"Status": "Success", "Response": str(documents[0])}
         return JSONResponse(content=response, status_code=200, media_type="application/json")
