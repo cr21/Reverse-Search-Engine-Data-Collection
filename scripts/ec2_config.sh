@@ -20,13 +20,15 @@ unzip awscliv2.zip
 sudo ./aws/install
 
 ## Github Runner configuration
+
 mkdir actions-runner && cd actions-runner
-curl -o actions-runner-linux-x64-2.298.2.tar.gz -L https://github.com/actions/runner/releases/download/v2.298.2/actions-runner-linux-x64-2.298.2.tar.gz
-echo "0bfd792196ce0ec6f1c65d2a9ad00215b2926ef2c416b8d97615265194477117  actions-runner-linux-x64-2.298.2.tar.gz" | shasum -a 256 -c
-tar xzf ./actions-runner-linux-x64-2.298.2.tar.gz
+curl -o actions-runner-linux-x64-2.299.1.tar.gz -L https://github.com/actions/runner/releases/download/v2.299.1/actions-runner-linux-x64-2.299.1.tar.gz
+echo "147c14700c6cb997421b9a239c012197f11ea9854cd901ee88ead6fe73a72c74  actions-runner-linux-x64-2.299.1.tar.gz" | shasum -a 256 -c
+tar xzf ./actions-runner-linux-x64-2.299.1.tar.gz
+
 
 ## Important Allow github token so we can connect with github token automatically whenever machine goes down
-./config.sh --url https://github.com/ketangangal/SearchEngine-DataCollection --token <mention-you-token-here>
+./config.sh --url https://github.com/cr21/Reverse-Search-Engine-Data-Collection --token ACG5HLVRSKZ7L5O7S3LKI5TDTQBLG
 ./run.sh
 
 ## Add Github runner as a service

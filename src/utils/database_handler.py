@@ -4,7 +4,8 @@ import certifi
 
 ca =certifi.where()
 MONGO_DB_URL_KEY = 'MONGO_DB_URL'
-DATABASE_NAME='reverse_image_search_engine'
+DATABASE_NAME= os.getenv('DATABASE_NAME')
+
 COLLECTION_NAME='embeddings'
 MONGO_DB_URL = os.getenv(MONGO_DB_URL_KEY)
 
