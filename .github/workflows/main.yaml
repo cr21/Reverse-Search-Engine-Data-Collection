@@ -71,9 +71,19 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      
+        #       aws ecr get-login-password \
+        #     --region <region> \
+        # | docker login \
+        #     --username AWS \
+        #     --password-stdin <aws_account_id>.dkr.ecr.<region>.amazonaws.com
+
+
+
+
+
       - name: AWS ECR Login
-        run: sudo docker login -u AWS -p $(aws ecr get-login-password --region ${{ secrets.AWS_REGION }}) ${{ secrets.AWS_ECR_LOGIN_URI }}
+        run : aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_LOGIN_URI }}
+        #run: sudo docker login -u AWS -p $(aws ecr get-login-password --region ${{ secrets.AWS_REGION }}) ${{ secrets.AWS_ECR_LOGIN_URI }}
 
       - name: Pull App Image
         run: sudo docker pull ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:DataCollection
