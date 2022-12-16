@@ -14,7 +14,7 @@ class s3Connection:
                                     aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY')
                                 )
         self.s3_resource = s3_session.resource('s3')
-        self.bucket = self.s3_resource.Bucket(os.environ['AWS_BUCKET_NAME'])
+        self.bucket = self.s3_resource.Bucket(os.getenv('AWS_BUCKET_NAME'))
 
 
     def add_label(self, label:str) -> Dict:
