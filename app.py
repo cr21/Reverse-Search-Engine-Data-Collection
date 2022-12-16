@@ -26,20 +26,22 @@ def run():
 def fetch_label():
     try:
         global choices
+        print("%"*500)
+        print(mongo_client.database['labels'])
+        print("$"*100)
         result = mongo_client.database['labels'].find()
-        if not result:
-            print("@"*50)
+        if  result:
+            print("1"*50)
             print(result)
-            print(list(result))
-            print("#"*300)
-        print(list(result))
+            print("2"*300)
+        return JSONResponse(content=str(list(result)), status_code=200, media_type="application/json")
         documents = [document for document in result]
         choices = dict(documents[0])
         response = {"Status": "Success", "Response": str(documents[0])}
         return JSONResponse(content=response, status_code=200, media_type="application/json")
     except Exception as e:
         print(e)
-        print("^"*500)
+        print("3"*500)
         raise e
 
 
