@@ -9,13 +9,13 @@ from src.exception import CustomException
 class s3Connection:
 
     def __init__(self) -> None:
-        s3_session = boto3.Session(
-                                    aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
-                                    aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY')
-                                )
-        self.s3_resource = s3_session.resource('s3')
-        self.bucket = self.s3_resource.Bucket(os.getenv('AWS_BUCKET_NAME'))
-
+        session = boto3.Session(
+            aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
+            aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY')
+        )
+        self.s3 = session.resource("s3")
+        self.bucket = self.s3.Bucket(os.environ["AWS_BUCKET_NAME"])
+        
 
     def add_label(self, label:str) -> Dict:
         """
