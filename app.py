@@ -29,12 +29,17 @@ def fetch_label():
         print("mongo_client",mongo_client.database)
         print("*"*100)
         result = mongo_client.database['labels'].find()
+        print(result)
+        if result:
+            print(result)
+            print("*"*300)
         documents = [document for document in result]
+        print(documents)
         choices = dict(documents[0])
         response = {"Status": "Success", "Response": str(documents[0])}
         return JSONResponse(content=response, status_code=200, media_type="application/json")
     except Exception as e:
-        return {"status":"Fail", "message":response[1]}
+        return {"status":"Fail"}
 
 @app.post("/add_label/{label_name}")
 def add_label(label_name:str):
