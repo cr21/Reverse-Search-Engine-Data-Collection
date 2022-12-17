@@ -131,7 +131,8 @@ dmypy.json
 
 # project specific
 # ignore all log dirs
-logs
+
 
 # ignore all data folderx
-data/
+data/caltech-101
+data/*.zip
