@@ -49,7 +49,7 @@ def add_label(label_name:str):
     if all_doc:
     # check if label exists or not
         if label_name in all_doc[0].values():
-            return {"status":"Fail", "message":f"Label Name{label_name} already exists"}
+            return {"status":"Fail", "message":f"Label Name {label_name} already exists"}
 
         last_val = list(map(int, list(all_doc[0].keys())[1:]))[-1]
         response = mongo_client.database['labels'].update_one(
