@@ -30,7 +30,10 @@ class s3Connection:
         try:
             key=f"images/{label}/"
             response=self.s3.put_object(Bucket=self.bucket,Body="",Key=key)
-            return {"Created":True, "Path":response.key}
+            
+            get_res = self.s3.get_object(Bucket=self.bucket,Key=key)
+            
+            return {"Created":True, "Path":get_res,"path32":response}
         except Exception as exp:
             message = CustomException(exp, sys)
             return {"Created": False, "Reason": message.error_message}

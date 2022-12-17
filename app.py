@@ -12,7 +12,7 @@ from src.utils.s3_handler import s3Connection
 import uvicorn
 
 app = FastAPI(title="Image Data Collection Server")
-# mongo_client = MongoClientConnector()
+mongo_client = MongoClientConnector()
 # print(f"mongo database", mongo_client.database)
 s3_connection =  s3Connection()
 
@@ -27,16 +27,12 @@ def run():
 def fetch_label():
     try:
         global choices
-        mongo_client = MongoClientConnector()
         result = mongo_client.database['labels'].find()
-        
         documents = [document for document in result]
         choices = dict(documents[0])
         response = {"Status": "Success", "Response": str(documents[0])}
         return JSONResponse(content=response, status_code=200, media_type="application/json")
     except Exception as e:
-        print(e)
-        print("3"*500)
         raise e
 
 
@@ -47,20 +43,27 @@ def add_label(label_name:str):
     And create corosponding bucket folder in s3 as well
     
     """
-    mongo_client = MongoClientConnector()
     query_result = mongo_client.database['labels'].find()
     all_doc = [doc for doc in query_result]
-    last_val = list(map(int, list(all_doc[0].keys())[1:]))[-1]
-    response = mongo_client.database['labels'].update_one(
-                                                            {"_id":all_doc[0]["_id"]},
-                                                            {"$set":{str(last_val+1):label_name}}
-                                             )
-                
-    if response.modified_count == 1:
-        response = s3_connection.add_label(label_name)
-        return {"status":"Success", "s3-response":response}
+    
+    if all_doc:
+    # check if label exists or not
+        if label_name in all_doc[0].values():
+            return {"status":"Fail", "message":f"Label Name{label_name} already exists"}
+
+        last_val = list(map(int, list(all_doc[0].keys())[1:]))[-1]
+        response = mongo_client.database['labels'].update_one(
+                                                                {"_id":all_doc[0]["_id"]},
+                                                                {"$set":{str(last_val+1):label_name}}
+                                                )
+                    
+        if response.modified_count == 1:
+            response = s3_connection.add_label(label_name)
+            return {"status":"Success", "s3-response":response}
+        else:
+            return {"status":"Fail", "message":response[1]}
     else:
-        return {"status":"Fail", "message":response[1]}
+        return  {"status":"Fail"}
 
 
 
@@ -95,3 +98,8 @@ async def single_upload(label: str, file: UploadFile = None):
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8080)
+
+
+
+
+    
