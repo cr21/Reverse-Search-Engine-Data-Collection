@@ -13,6 +13,7 @@ import uvicorn
 
 app = FastAPI(title="Image Data Collection Server")
 mongo_client = MongoClientConnector()
+print(f"mongo database", mongo_client.database)
 s3_connection =  s3Connection()
 
 choices = {}
@@ -26,15 +27,8 @@ def run():
 def fetch_label():
     try:
         global choices
-        print("%"*500)
-        print(mongo_client.database['labels'])
-        print("$"*100)
         result = mongo_client.database['labels'].find()
-        if  result:
-            print("1"*50)
-            print(result)
-            print("21"*300)
-        return JSONResponse(content=str(list(result)), status_code=200, media_type="application/json")
+        
         documents = [document for document in result]
         choices = dict(documents[0])
         response = {"Status": "Success", "Response": str(documents[0])}
@@ -76,14 +70,8 @@ def single_upload():
 
 @app.post("/single_upload/")
 async def single_upload(label: str, file: UploadFile = None):
-    # print(type(file.file))
-    # import io
-    # ffff= io.BytesIO(file.file)
-    # print(type(ffff))
-    # print(1/0)
-    # return {"file":type(file.file)}
+    
     label = choices.get(label, False)
-    #print(label)
     if file.content_type == "image/jpeg" and label != False:
         contents = await file.read()
         #print(contents)
