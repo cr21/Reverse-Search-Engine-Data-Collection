@@ -33,7 +33,7 @@ class s3Connection:
             
             get_res = self.s3.get_object(Bucket=self.bucket,Key=key)
             
-            return {"Created":True, "Path":get_res,"path32":response}
+            return {"Created":True}
         except Exception as exp:
             message = CustomException(exp, sys)
             return {"Created": False, "Reason": message.error_message}
