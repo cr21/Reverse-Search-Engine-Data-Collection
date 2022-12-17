@@ -12,8 +12,8 @@ from src.utils.s3_handler import s3Connection
 import uvicorn
 
 app = FastAPI(title="Image Data Collection Server")
-mongo_client = MongoClientConnector()
-print(f"mongo database", mongo_client.database)
+# mongo_client = MongoClientConnector()
+# print(f"mongo database", mongo_client.database)
 s3_connection =  s3Connection()
 
 choices = {}
@@ -27,6 +27,7 @@ def run():
 def fetch_label():
     try:
         global choices
+        mongo_client = MongoClientConnector()
         result = mongo_client.database['labels'].find()
         
         documents = [document for document in result]
@@ -46,6 +47,7 @@ def add_label(label_name:str):
     And create corosponding bucket folder in s3 as well
     
     """
+    mongo_client = MongoClientConnector()
     query_result = mongo_client.database['labels'].find()
     all_doc = [doc for doc in query_result]
     last_val = list(map(int, list(all_doc[0].keys())[1:]))[-1]
